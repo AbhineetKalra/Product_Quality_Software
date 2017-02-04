@@ -1,0 +1,25 @@
+Please enter your code review in this file as plain text
+and make sure to include it when you commit your project.
+
+
+StopWatchImplementation:
+Line 8: Incorrect ordering of imports. Package imports should come before java imports. In this case "edu.nyu.pqs.stopwatch.api.Stopwatch" should be imported before java imports.
+Line 18: The access specifier of class "StopwatchImplementation" should be package-private.
+Line 19: The name of enum should begin with upper case. In this case the name of enum variable should be "State".
+Line 20: There should be spaces between each possible value of the enum.
+Line 37: The access-specifier of constructor should be package-private. 
+Line 56,79: Creating an object of Calendar class to get time is expensive and unnecessary. Using System.currentTimeMillis() would be an alternative.
+Line 60: According to style guide comments should appear in a separate line. 
+Line 91: Stop and lap are not thread safe. Call to lap should be inside the synchronized block. Consider a situation when thread1 accesses lap after thread2 has called stop. In this case if the control goes to thread1 just before the state of the stopwatch was about to be set to STOPPED, thread1 will be able to record a lap. This should not have been allowed.
+Line 101: StopDuration should be set to 0 in the reset method. Due to this mistake start->lap->stop->start->reset->start->lap->stop would lead to incorrect laptimes.
+Line 118,125: Defeating the purpose of using StringBuilder by concatenating strings within the append method. Should have used append method again instead of concatenating.
+Line 120: The variable name res can be improved to resultString.
+The stopwatch is considering the last lap recorded when stop is called as a new lap. Example: start->lap->stop->start->lap->stop. The list of lap times should contain 3 timings while it contains 4. This is not the desired behavior of stopwatch. 
+  
+StopWatchFactory:
+Line 7: Incorrect ordering of imports. Package imports should come before java imports. In this case "edu.nyu.pqs.stopwatch.api.Stopwatch" should be imported before java imports. 
+Line 16: Should use interfaces for declaration, not concrete classes.
+Line 16: Using thread safe data structures in synchronized methods is not required. Too much load. There is no need to use thread-safe data structure if it is being used in synchronized methods. HashMap would have been a good choice.
+Line 31: id should be trimmed using trim() method before checking if it is empty or already taken. 
+Line 38,39: The StopWatch ID "id" should be case-sensitive even though the comparison can be case insensitive.
+  

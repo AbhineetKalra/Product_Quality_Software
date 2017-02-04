@@ -1,0 +1,54 @@
+Please enter your code review in this file as plain text
+and make sure to include it when you commit your project.
+
+ 1. JavaDocs can contain more details about the domain and range of the attributes. All of the setters are missing the @param attribute. Could have mentioned the domain of the values there. Also, missing javaDoc for AddressBookEntry class. Also the serialize and deserialize methods in class AddressBookEntry should have @throws in their javadocs.
+ 
+ 2. Null values are not being checked. Like in Line 126 of class Addressbook, What if null value is passed to the deserialize method. and same goes for the serialize method. Also, in class AddressBook Line 28, field should have been checked for nulls. 
+ 
+ 3. In class AddressBookEntry: Setters are used in AddressBookEntry class. This is generally not a good design technique. Since the attributes are not final, they can be changed via setters.
+ 
+ 4. In class AddressBookEntry: Instead of using if..else statements and using setters, a builder pattern would have been a better choice in this case.
+ 
+ 5. In class AddressBookEntry: toString() method should have been overridden in both the classes. It is always a good practice to override toString() in-order to increase readability of the class. 
+ 
+ 6. In class AddressBookEntry: He/She should have implemented equals and hashcode methods. In this class two AddressBookEntries should be equal if their values and fields are equal.
+ 
+ 7. In class AddressBook, Line 69: It would have been a good decision to not allow duplicate values in the AddressBook. Even if this was the choice of designer it should have been mentioned in the JavaDocs.
+ 
+ 8. In class AddressBook, Line 79: No checks are being performed before deletion. There should be a condition to check if the Entry is present in the AddressBook or not. Moreover null check should also have been implemented.
+ 
+ 9. In class AddressBook, Line 27: The search method returns the the list of entries which are a direct reference to the AddressBook. A copy of the AddressBook should have been returned.
+  
+ 10. Line 76, 106 in AddressBokEntry: Exceptions could have been handled in a better way. If you are not doing anything with the exception he/she could have just thrown an exception in method signature.
+ 
+ 11. In class AddressBookEntry, Line 30: Even if constructor is being used to create AddressBookEntries, there is no way that the user can pass only some arguments. He/She will need to pass all the arguments even if null which is a bad choice. Again, builder pattern would have been a good choice.
+
+ 12. In class AddressBookEntry: Also there is no mention of optional or mandatory parameters. It makes no sense to have a blank entry in the AddressBook.
+ 
+ 13. In class AddressBookEntry, Line 22: We can create a contact with all the values "" using the default constructor. I don't think having no name or phone number should be valid AddressBookEntry. Atleast one of them should be mandatory.
+ 
+ 14. In class AddressBook, Line 27: The search method in AddressBook can be made smaller by removing the case statements. The user can enter the string and it can be searched in the entry by just to toString() method and contains. It would have been much more readable.
+
+ 15. In class AddressBook: I think the logic of serialize and deserialize will work correctly in this case but will still recommend using parser library since it would have been tested more throughly.
+ 
+ 16. In class AddressBookEntry, Line 8: The access specifier of enum used in addressBookEntry is not defined which makes it package accessible. In my opinion that is incorrect since the enum would not be accessible outside the package and we couldn't use it to provide the enum value in search method if used outside the package.  
+
+ 17. The overall API is not thread safe as there are non final members and setters are used.
+ 
+ 18. In class AddressBook, Line 27: The search method is case sensitive. It would have been a better choice to convert both the text to lower case before comparing them. Even if he/she wanted to make the search case sensitive it should have been mentioned in javadocs.
+ 
+ 19. In class AddressBookEntry: The access specifier of serialize and deserialize methods is protected. Not sure why is that.I think it should be public if you intend your users to use the method or it should be package visible.
+ 
+ 20. The search should return all entries in case of "" is passed. Also 123-122 should match 123122. Even if this is not the intention it should be stated in javadocs.
+ 
+ 21. ArrayLists in Line 11 and 28 in AddressBook class should be declared in a seperate interface. 
+ 
+ 22. In class AddressBookEntry: serialize and deserialize methods use StringBuffers which is a good choice.
+ 
+ 23. CamelCase naming is used which is a good practice and also Enums are used in class AddressBookEntry which is another good choice.
+ 
+ 24. In class AddressBook, Line 122 : StringBuffer is used instead of StringBuilder.
+ 
+ 25. In class AddressBook, Line 31-57: All the cases should be contained within braces. Also, there should be default implementation. It could be some error message.
+ 
+ 26. In class AddressBookEntry: The default constructor is useless as default values could have been assigned to data variables at the time of declaration.
